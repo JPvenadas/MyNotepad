@@ -5,8 +5,13 @@ const Login = ({navigation}) => {
   return (
     <View>
         <Text>Hello WOrld</Text>
-        <Button
-        title="Go to Details"
+        
+       <Button
+        title="Login"
+        onPress={() => navigation.navigate('Loading')}
+      />
+      <Button
+         title="Doesn't have an account yet?"
         onPress={() => navigation.navigate('Register')}
       />
     </View>
