@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Text, TextInput, View, Alert, StyleSheet } from 'react-native'
-import { Button, Input } from 'react-native-elements'
+import { Button } from 'react-native-elements'
+import { Global } from '../../styles/GlobalStyles'
 import { Formik } from 'formik'
 import * as yup from 'yup'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const validation = yup.object({
     confirmpassword: yup.string().required('Confirmation Required'),
@@ -15,10 +17,42 @@ const validation = yup.object({
      
 });
 
+export function RegisterForm({Register, Login}) {
+         
+    const [database, setDatabase] = useState("")
+    
+    const storeData = async () => {
+      const value = {
+        users:[]
+    }
+      try {
+        const jsonValue = JSON.stringify(value)
+        await AsyncStorage.setItem('database', jsonValue)
+        getData()
+      } catch (e) {
+      console.log(e)
+      }
+    }
 
+    const getData = async () => {
+      try {
+        const value = await AsyncStorage.getItem('database')
+        if(value !== null) {
+         setDatabase(JSON.parse(value))
+        }
+        if(value === null){
+         storeData();
+        }
+      } catch(e) {
+       console.log(e)
+      }
+    }
+    
 
-export class RegisterForm extends Component {
-  render() {
+    useEffect(()=>{
+      getData()
+    },[])
+
       return (
           <View style={styles.Container}>
               <Text style={styles.title}>Register Account</Text>
@@ -33,78 +67,78 @@ export class RegisterForm extends Component {
                       }}
                   onSubmit={
                       (values, errors) => {
-                          console.log(values)
-                          Alert.alert('Registration Successful')
+                          Register()
+                          console.log(values);
                       }
                   }
                   validationSchema = {validation}
               >
                   {({ handleChange, handleSubmit, values, errors, touched }) => (
                       <View style={styles.form}>
-                          <View style={styles.inputContainer}>
+                          <View style={Global.inputContainer}>
                           <TextInput 
-                          style={styles.input}
+                          style={Global.input}
                           onChangeText={handleChange('firstname')}  
                           placeholder='FirstName' />
 
                               {errors.firstname && touched.firstname ? 
-                                  <Text style={styles.error}>{errors.firstname}</Text> :
+                                  <Text style={Global.error}>{errors.firstname}</Text> :
                                   null
                               }
                               
                          </View>
-                         <View style={styles.inputContainer}>
+                         <View style={Global.inputContainer}>
                           <TextInput 
-                          style={styles.input}
+                          style={Global.input}
                           onChangeText={handleChange('lastname')}  
                           placeholder='LastName' />
                         {errors.lastname && touched.lastname?
-                        <Text style={styles.error}>{errors.lastname}</Text>:
+                        <Text style={Global.error}>{errors.lastname}</Text>:
                         null
                         }
                         </View>
-                          <View style={styles.inputContainer}>
+                          <View style={Global.inputContainer}>
                           <TextInput
-                          style={styles.input} 
+                          style={Global.input} 
                           onChangeText={handleChange('email')}  
                           placeholder='Email' />
                           
                           {errors.email && touched.email ?
-                                  <Text style={styles.error}>{errors.email}</Text> :
+                                  <Text style={Global.error}>{errors.email}</Text> :
                                   null
                               }
 
                           </View>
-                          <View style={styles.inputContainer}>
+                          <View style={Global.inputContainer}>
                           <TextInput 
-                          style={styles.input}
+                          style={Global.input}
                           onChangeText={handleChange('password')} 
                           secureTextEntry={true} 
                            placeholder='Password' />
                          
                          {errors.password && touched.password ?
-                                  <Text style={styles.error}>{errors.password}</Text> :
+                                  <Text style={Global.error}>{errors.password}</Text> :
                                   null
                               }
 
                           </View>
-                          <View style={styles.inputContainer}>
+                          <View style={Global.inputContainer}>
                           <TextInput 
-                          style={styles.input}
+                          style={Global.input}
                           onChangeText={handleChange('confirmpassword')} 
                           secureTextEntry={true}  
                           placeholder='Confirm Password' />
                          
                          {errors.confirmpassword && touched.confirmpassword ?
-                                  <Text style={styles.error}>{errors.confirmpassword}</Text> :
+                                  <Text style={Global.error}>{errors.confirmpassword}</Text> :
                                   null
                               }
 
                           </View>
 
-                          <View style={styles.inputContainer}>
+                          <View style={Global.inputContainer}>
                               <Button
-                                  buttonStyle={styles.button}
+                                  buttonStyle={Global.button}
                                   title='Register'
                                   onPress={()=>{
                                       errors.firstname? Alert.alert(errors.firstname):
@@ -114,36 +148,34 @@ export class RegisterForm extends Component {
                                       errors.confirmpassword? Alert.alert(errors.confirmpassword): ''
                                       handleSubmit()}} />
                           </View>
-                         
-                          <View style={styles.inputContainer}>
+                         <Text>or</Text>
+                          <View style={Global.inputContainer}>
                               <Button
-                                  buttonStyle={styles.button}
-                                  title='Already Have an account?'/>
+                                  buttonStyle={Global.subButton}
+                                  title='Already Have an account?'
+                                  onPress={()=>{Login()}}/>
+                                  
                           </View>
+                          <Text></Text>
                       </View>)
                   }
               </Formik>
           </View>
     )
   }
-}
+
 
 const styles = StyleSheet.create({
     Container: {
-        flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
         height: 'auto'
     },
-    error:{
-        color: 'red',
-        fontSize: 10,
-        alignSelf: 'flex-start',
-
-    },
     title:{
-        color: '#277ef0',
-        fontSize: 23,
+        color: '#f1962f',
+        fontSize: 24,
+        fontStyle: 'italic',
+        paddingBottom: 50,
         fontWeight: 'bold',
        
     },
@@ -152,25 +184,6 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center'
     },
-    inputContainer:{
-        marginVertical: 5,
-        width: '80%',
-        display: 'flex',
-    },
-    input: {
-        padding: 10,
-        width: '100%',
-        borderWidth: 1,
-        borderColor: '#277ef0',
-        borderRadius: 8
-    },
-    button:{
-        width: '100%',
-        alignSelf: 'center',
-        margin: 10,
-        padding: 10,
-        borderRadius: 8
-    }
 })
 
 export default RegisterForm

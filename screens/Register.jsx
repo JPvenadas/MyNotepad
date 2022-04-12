@@ -1,61 +1,32 @@
 import React, {useState, useEffect, useLayoutEffect} from 'react'
 import { View, Text, 
   Button, TextInput,
-  ScrollView } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import RegisterForm from '../components/RegisterForm'
+  ScrollView, StyleSheet } from 'react-native'
+import { Global } from '../styles/GlobalStyles'
+import RegisterForm from '../components/Register/RegisterForm'
 
 
 const Register = ({navigation}) => {
-    const [database, setDatabase] = useState("")
-    
-    const storeData = async () => {
-      const value = {
-        users:[]
-    }
-      try {
-        const jsonValue = JSON.stringify(value)
-        await AsyncStorage.setItem('database', jsonValue)
-        getData()
-      } catch (e) {
-      console.log(e)
-      }
-    }
-
-    const getData = async () => {
-      try {
-        const value = await AsyncStorage.getItem('database')
-        if(value !== null) {
-         setDatabase(JSON.parse(value))
-        }
-        if(value === null){
-         storeData();
-        }
-      } catch(e) {
-       console.log(e)
-      }
-    }
-    
-
-    useEffect(()=>{
-      getData()
-    },[])
-
+  function navigatelogin(){
+    navigation.navigate('Login')
+  }
+  function navigateLoading(){
+    navigation.navigate('Loading')
+  }
   return (
-    <ScrollView> 
-          <Text>Register Screen</Text>
-          
-          <Button
-              title="Register"
-              onPress={() => navigation.navigate('Loading')}
-          />
-          <Button
-              title="Already have an account?"
-              onPress={() => navigation.navigate('Login')}
-          />
-          <RegisterForm/>
-    </ScrollView>
+    <View style={Global.container}>
+      <RegisterForm Register={navigateLoading} Login={navigatelogin}/>
+    </View>
+   
   )
 }
-
+const styles = StyleSheet.create(
+  {
+    container: {
+      flex:1,
+      justifyContent: 'center',
+      alignItems: 'center'
+    }
+  }
+)
 export default Register

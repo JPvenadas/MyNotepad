@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 import { useState } from 'react/cjs/react.production.min'
-
+import { Global } from '../styles/GlobalStyles'
 
 const Loading = ({navigation}) => {
   setTimeout(()=>{
@@ -10,8 +10,8 @@ const Loading = ({navigation}) => {
   },3000)
 
   return (
-    <View>
-        <Text>Loading</Text>
+    <View style={Global.container}>
+        
     </View>
   )
 }
