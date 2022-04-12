@@ -1,16 +1,34 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { View, TextInput, Text, Alert, StyleSheet } from 'react-native'
 import { Button, Input } from 'react-native-elements'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { Global } from '../../styles/GlobalStyles'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const validation = yup.object({
   email: yup.string().required('Please Input your Username'),
   password: yup.string().required('Please Input your Password')
 });
 
+
 const LoginForm = ({Register, onLogin}) => {
+
+  const [database, setDatabase] = useState("")
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('database')
+      if(value != null) {
+       setDatabase(JSON.parse(value))
+      }
+    } catch(e) {
+     console.log(e)
+    }
+  }
+
+  useEffect(()=>{
+    getData()
+  },[])
   return (
     <View style={styles.Container}>
       <Formik
@@ -21,8 +39,14 @@ const LoginForm = ({Register, onLogin}) => {
           }}
         onSubmit={
           (values) => {
-            console.log(values);
-            onLogin()
+            {database.users.map((user)=>{
+              if(values.email == user.email && values.password == user.password){
+                onLogin()
+                return
+              }
+            })}
+            Alert.alert('Login Error', "Wrong Username and Password")
+           
           }
         }
         validationSchema={validation}
