@@ -1,7 +1,9 @@
 import React, {useState, useEffect, useLayoutEffect} from 'react'
-import { View, Text, Button, TextInput } from 'react-native'
+import { View, Text, 
+  Button, TextInput,
+  ScrollView } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry'
+import RegisterForm from '../components/RegisterForm'
 
 
 const Register = ({navigation}) => {
@@ -40,7 +42,7 @@ const Register = ({navigation}) => {
     },[])
 
   return (
-    <View> 
+    <ScrollView> 
           <Text>Register Screen</Text>
           
           <Button
@@ -51,9 +53,8 @@ const Register = ({navigation}) => {
               title="Already have an account?"
               onPress={() => navigation.navigate('Login')}
           />
-           
-           
-    </View>
+          <RegisterForm/>
+    </ScrollView>
   )
 }
 

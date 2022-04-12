@@ -1,9 +1,9 @@
 import React from 'react'
-import { View, Text, Button } from 'react-native'
+import { View, Text, Button, ScrollView } from 'react-native'
 
 const Login = ({navigation}) => {
   return (
-    <View>
+    <ScrollView>
         <Text>Hello WOrld</Text>
         
        <Button
@@ -14,7 +14,7 @@ const Login = ({navigation}) => {
          title="Doesn't have an account yet?"
         onPress={() => navigation.navigate('Register')}
       />
-    </View>
+    </ScrollView>
   )
 }
 
