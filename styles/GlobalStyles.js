@@ -20,14 +20,14 @@ export const Global = StyleSheet.create(
             alignSelf: 'center',
             padding: 10,
             borderRadius: 8,
-            backgroundColor: '#ea8647'
+            backgroundColor: '#60a356'
         },
         subButton:{
             width: '100%',
             alignSelf: 'center',
             padding: 10,
             borderRadius: 8,
-            backgroundColor:'#eea476'
+            backgroundColor: '#83c49e'
         },
         inputContainer: {
             marginVertical: 5,

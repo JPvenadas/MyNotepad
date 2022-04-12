@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { useState } from 'react/cjs/react.production.min'
 import { Global } from '../styles/GlobalStyles'
+import LottieView from 'lottie-react-native'
 
 const Loading = ({navigation}) => {
   setTimeout(()=>{
@@ -11,7 +11,10 @@ const Loading = ({navigation}) => {
 
   return (
     <View style={Global.container}>
-        
+         <LottieView source={
+          require('../assets/94123-1hour-login-effect.json')}
+        autoPlay={true}
+        loop={true}/>
     </View>
   )
 }
