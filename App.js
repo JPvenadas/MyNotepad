@@ -9,7 +9,7 @@ function App() {
 
   return (
     <NavigationContainer>
-        <Navigations />
+      <Navigations />
     </NavigationContainer>
    
   );

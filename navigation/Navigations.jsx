@@ -5,6 +5,7 @@ import Register from '../screens/Register';
 import Loading from '../screens/Loading';
 import Menu from '../screens/Menu';
 import Noteview from '../screens/Noteview';
+import NoteAdd from '../screens/NoteAdd';
 import NoteEdit from '../screens/NoteEdit';
 
 const Stack = createNativeStackNavigator();
@@ -31,11 +32,26 @@ const Navigations = () => {
           headerTintColor: 'white',
           headerBackVisible: false,
           headerStyle:{
-            backgroundColor: '#ebcf4f',
+            backgroundColor: '#f4dc72',
           }
         }}/>
-        <Stack.Screen name="NoteView" component={Noteview} />
-        <Stack.Screen name="NoteEdit" component={NoteEdit} />
+        <Stack.Screen name="NoteView" component={Noteview}/>
+        <Stack.Screen name="NoteAdd" component={NoteAdd}
+        options={{
+          title: "Add a Note",
+          headerTitleAlign: 'center',
+          headerTintColor: 'white',
+          headerStyle:{
+          backgroundColor: '#f4dc72',
+          }}} />
+          <Stack.Screen name="Edit Notes" component={NoteEdit}
+        options={{
+          title: "Add a Note",
+          headerTitleAlign: 'center',
+          headerTintColor: 'white',
+          headerStyle:{
+          backgroundColor: '#f4dc72',
+          }}} />
     </Stack.Navigator>
   )
 }

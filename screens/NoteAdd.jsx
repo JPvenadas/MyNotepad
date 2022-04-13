@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet, ScrollView } from 'react-native'
 import { Icon, Button } from 'react-native-elements'
 
 
-const NoteEdit= ({navigation}) => {
+const NoteAdd = ({navigation}) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -12,7 +12,7 @@ const NoteEdit= ({navigation}) => {
         icon={<Icon name='send' color="#fff"/>}
         buttonStyle={{
           backgroundColor: 'transparent',
-        }} onPress={() => {navigation.navigate('NoteEdit')}}/>
+        }} onPress={() => {navigation.navigate('NoteAdd')}}/>
     )})
     });
 
@@ -34,14 +34,14 @@ const NoteEdit= ({navigation}) => {
 
 const styles = StyleSheet.create({
   input1:{
-    backgroundColor: "#e3d47060",
+    backgroundColor: "#c0e3705f",
     padding: 15,
     marginTop: 20,
     borderRadius: 5,
     margin: 15,
   },
   input2:{
-    backgroundColor: "#e3d47060",
+    backgroundColor: "#c0e3705f",
     padding: 19,
     fontSize: 16,
     margin: 15,
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default NoteEdit
+export default NoteAdd

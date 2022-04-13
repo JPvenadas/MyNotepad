@@ -11,7 +11,6 @@ const Login = ({navigation}) => {
    navigation.navigate('Register')
  }
  const navigateLoading = (user) =>{
-   console.log(user)
   navigation.navigate('Loading',user)
 }
 
