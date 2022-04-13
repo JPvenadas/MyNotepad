@@ -42,7 +42,7 @@ const LoginForm = ({Register, onLogin}) => {
            let variable
             database.users.map((user) => {
               if (values.email == user.email && values.password == user.password){
-                onLogin()
+                onLogin(user)
                 variable = true
               }
             }) 
