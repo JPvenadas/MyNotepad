@@ -5,15 +5,13 @@ import Navigations from './navigation/Navigations';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-
 function App() {
-  
-  const [users, setUsers] = useState([])
 
   return (
     <NavigationContainer>
-      <Navigations/>
+        <Navigations />
     </NavigationContainer>
+   
   );
 }
 

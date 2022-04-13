@@ -33,6 +33,14 @@ export function RegisterForm({Register, Login}) {
       console.log(e)
       }
     }
+    const store = async () => {
+        try {
+          await AsyncStorage.setItem('database', JSON.stringify(database))
+        } catch (e) {
+        console.log(e)
+        }
+      }
+
 
     const getData = async () => {
       try {
@@ -48,14 +56,16 @@ export function RegisterForm({Register, Login}) {
       }
     }
     
-
     useEffect(()=>{
       getData()
     },[])
+    useEffect(()=>{
+        store()
+    },[database])
 
       return (
           <View style={styles.Container}>
-              <Text style={styles.title}>Register Account</Text>
+              <Text style={styles.title}>Sign up</Text>
               <Formik
                   initialValues={
                       {
@@ -67,8 +77,18 @@ export function RegisterForm({Register, Login}) {
                       }}
                   onSubmit={
                       (values, errors) => {
+                          setDatabase({
+                              users: [...database.users,
+                              {   key: Math.random(),
+                                  firstname: values.firstname,
+                                  lastname: values.lastname,
+                                  email: values.email,
+                                  password: values.password,
+                                  notes: []
+                              }
+                              ]
+                          })
                           Register()
-                          console.log(values);
                       }
                   }
                   validationSchema = {validation}

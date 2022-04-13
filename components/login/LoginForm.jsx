@@ -28,7 +28,7 @@ const LoginForm = ({Register, onLogin}) => {
 
   useEffect(()=>{
     getData()
-  },[])
+  },[database])
   return (
     <View style={styles.Container}>
       <Formik
@@ -39,14 +39,14 @@ const LoginForm = ({Register, onLogin}) => {
           }}
         onSubmit={
           (values) => {
-            {database.users.map((user)=>{
-              if(values.email == user.email && values.password == user.password){
+           let variable
+            database.users.map((user) => {
+              if (values.email == user.email && values.password == user.password){
                 onLogin()
-                return
+                variable = true
               }
-            })}
-            Alert.alert('Login Error', "Wrong Username and Password")
-           
+            }) 
+            !variable? Alert.alert('Login Error', 'Wrong Username and Password'): ''; 
           }
         }
         validationSchema={validation}

@@ -14,19 +14,19 @@ const Register = ({navigation}) => {
     navigation.navigate('Loading')
   }
   return (
-    <View style={Global.container}>
+    <ScrollView >
+      <View style={styles.container}>
       <RegisterForm Register={navigateLoading} Login={navigatelogin}/>
-    </View>
-   
+      </View>
+    </ScrollView>
   )
 }
 const styles = StyleSheet.create(
   {
     container: {
       flex:1,
+      height: 700,
       justifyContent: 'center',
-      alignItems: 'center',
-      color: '#83c49e'
     }
   }
 )
