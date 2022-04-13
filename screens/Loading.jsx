@@ -3,12 +3,12 @@ import { View, Text } from 'react-native'
 import { Global } from '../styles/GlobalStyles'
 import LottieView from 'lottie-react-native'
 
-const Loading = ({navigation}) => {
+const Loading = ({route, navigation}) => {
   setTimeout(()=>{
     navigation.pop()
-    navigation.navigate('Menu')
+    navigation.navigate('Menu',route.params)
   },3000)
-
+  
   return (
     <View style={Global.container}>
          <LottieView source={

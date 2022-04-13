@@ -10,8 +10,9 @@ const Login = ({navigation}) => {
  const navigateRegister = () =>{
    navigation.navigate('Register')
  }
- const navigateLoading = () =>{
-  navigation.navigate('Loading')
+ const navigateLoading = (user) =>{
+   console.log(user)
+  navigation.navigate('Loading',user)
 }
 
   return (

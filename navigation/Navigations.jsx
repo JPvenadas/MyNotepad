@@ -18,13 +18,22 @@ const Navigations = () => {
         }} />
         <Stack.Screen name="Register" component={Register}
          options={{
-          headerShown: false
+          headerShown: false,
         }} />
         <Stack.Screen name="Loading" component={Loading}
          options={{
           headerShown: false
         }}  />
-        <Stack.Screen name="Menu" component={Menu} />
+        <Stack.Screen name="Menu" component={Menu} 
+        options={{
+          title: "Notes",
+          headerTitleAlign: 'center',
+          headerTintColor: 'white',
+          headerBackVisible: false,
+          headerStyle:{
+            backgroundColor: '#ebcf4f',
+          }
+        }}/>
         <Stack.Screen name="NoteView" component={Noteview} />
         <Stack.Screen name="NoteEdit" component={NoteEdit} />
     </Stack.Navigator>
