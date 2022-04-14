@@ -10,8 +10,8 @@ const Register = ({navigation}) => {
   function navigatelogin(){
     navigation.navigate('Login')
   }
-  function navigateLoading(){
-    navigation.navigate('Loading')
+  function navigateLoading(user){
+    navigation.navigate('Loading',user)
   }
   return (
     <ScrollView >
