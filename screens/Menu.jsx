@@ -12,7 +12,7 @@ const Menu = ({route, navigation}) => {
         icon={<Icon name='add' color="#fff"/>}
         buttonStyle={{
           backgroundColor: 'transparent',
-        }} onPress={() => {navigation.navigate('NoteAdd')}}/>
+        }} onPress={() => {navigation.navigate('NoteAdd',route.params)}}/>
       ),
       headerLeft: ()=>(
         <Button 

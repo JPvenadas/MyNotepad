@@ -77,18 +77,17 @@ export function RegisterForm({Register, Login}) {
                       }}
                   onSubmit={
                       (values, errors) => {
+                          const newuser = {   key: Math.random(),
+                            firstname: values.firstname,
+                            lastname: values.lastname,
+                            email: values.email,
+                            password: values.password,
+                            notes: []
+                        }
                           setDatabase({
-                              users: [...database.users,
-                              {   key: Math.random(),
-                                  firstname: values.firstname,
-                                  lastname: values.lastname,
-                                  email: values.email,
-                                  password: values.password,
-                                  notes: []
-                              }
-                              ]
+                              users: [...database.users, newuser]
                           })
-                          Register()
+                          Register(newuser)
                       }
                   }
                   validationSchema = {validation}
