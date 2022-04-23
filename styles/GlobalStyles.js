@@ -11,23 +11,22 @@ export const Global = StyleSheet.create(
         input: {
             padding: 10,
             width: '100%',
-            borderWidth: 1,
-            borderColor: '#e8905a',
-            borderRadius: 8
+            backgroundColor: '#d7d7d7',
+            borderRadius: 6
         },
         button:{
             width: '100%',
             alignSelf: 'center',
             padding: 10,
-            borderRadius: 8,
-            backgroundColor: '#60a356'
+            borderRadius: 6,
+            backgroundColor: '#dda640'
         },
         subButton:{
             width: '100%',
             alignSelf: 'center',
             padding: 10,
             borderRadius: 8,
-            backgroundColor: '#83c49e'
+            backgroundColor: '#ecbc62'
         },
         inputContainer: {
             marginVertical: 5,

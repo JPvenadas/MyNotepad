@@ -81,7 +81,7 @@ const NoteAdd = ({route,navigation}) => {
 
 const styles = StyleSheet.create({
   input1:{
-    backgroundColor: "#c0e3705f",
+    backgroundColor: "#f8ee95ce",
     padding: 15,
     marginTop: 20,
     marginRight: 0,
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     margin: 15,
   },
   input2:{
-    backgroundColor: "#c0e3705f",
+    backgroundColor: "#f8ee95ce",
     padding: 19,
     fontSize: 16,
     margin: 15,
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     flex: 2,
     margin: 18,
-    backgroundColor:  "#c0e370fd",
+    backgroundColor:  "#ddb74ffc",
   }
 })
 

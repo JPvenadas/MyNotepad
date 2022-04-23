@@ -131,10 +131,10 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   subtitile1:{
-    color: '#5d96d8'
+    color: '#535455',
   },
   subtitile2:{
-    color: '#e8905a'
+    color: '#e8bc43'
   }
 })
 

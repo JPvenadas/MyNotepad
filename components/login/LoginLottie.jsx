@@ -1,14 +1,11 @@
 import React from 'react'
-import { StyleSheet, View  } from 'react-native'
-import LottieView from 'lottie-react-native';
+import { StyleSheet, View, Image } from 'react-native'
 
 const LoginLottie = () => {
   return (
     <View style={styles.container}>
-        <LottieView source={
-          require('../../assets/95411-contract-sign.json')}
-        autoPlay={true}
-        loop={true}
+        <Image source={
+          require('../../assets/notepad.png')}
     style={styles.image}/>
    </View>
   )
@@ -19,11 +16,12 @@ const styles = StyleSheet.create({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      height: 250
+      height: 200,
+      marginBottom: 30,
     },
     image: {
-       width: '100%',
-       height: 200,
+       width: '70%',
+       height: 180,
       },
 })
 export default LoginLottie

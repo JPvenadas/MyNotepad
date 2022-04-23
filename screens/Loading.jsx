@@ -11,10 +11,11 @@ const Loading = ({route, navigation}) => {
   
   return (
     <View style={Global.container}>
-         <LottieView source={
-          require('../assets/94123-1hour-login-effect.json')}
+      <LottieView
+        source={require('../assets/9619-loading-dots-in-yellow.json')}
         autoPlay={true}
-        loop={true}/>
+        loop={true}
+      />
     </View>
   )
 }
