@@ -7,25 +7,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Menu = ({route, navigation}) => {
   const [notes, setnotes] = useState()
-  const [database, setDatabase] = useState()
-  const [userkey, setUserkey] = useState()
+  const [database, setDatabase] = useState({})
+  const [loggeduser, setLoggedUser] = useState()
   
-  useEffect(()=>{
-  
-    let active = true
-      if (active) {
-        setNotes()
-      }
-    return ()=>{
-      active= false
-    }
-    
-  },[])
-
   useFocusEffect(
     React.useCallback(() => {
     let active = true
       if (active) {
+        setnotes(route.params.notes)
         setNotes()
       }
     return ()=>{
@@ -33,6 +22,8 @@ const Menu = ({route, navigation}) => {
     }
     }, [route])
   )
+
+  
 
   const deleteitem = (key) =>{
     let updatedDB = database.users
@@ -45,8 +36,10 @@ const Menu = ({route, navigation}) => {
       user.notes = user.notes.filter(note => note.key != key)
     }
    );
+
     setDatabase({users: upload})
     storeData()
+    setnotes(notes.filter(note => note.key != key))
     setNotes()
   }
   const storeData = async () => {
@@ -58,25 +51,21 @@ const Menu = ({route, navigation}) => {
   }
 
   const getData = async () => {
+    let value
     try {
-      const value = await AsyncStorage.getItem('database')
+       value = await AsyncStorage.getItem('database')
       if(value != null) {
-       setDatabase(JSON.parse(value))
+       return JSON.parse(value)
       }
-    } catch(e) {
-     console.log(e)
+    } catch(e){
+      return(null)
     }
   }
 
   const setNotes = async () =>{
-    setUserkey(route.params.key)
-    await getData()
-    database.users.map(user =>{
-      if(user.key == userkey){
-        setnotes(user.notes)
-      }
-  })
+    setDatabase(await getData())
   }
+
 
 
   const render = ({item}) =>{
@@ -128,7 +117,7 @@ const Menu = ({route, navigation}) => {
       <FlatList
       data={notes}
       renderItem={render}/>
-      <Text>{JSON.stringify(notes)}</Text>
+      <Text>{JSON.stringify(loggeduser)}</Text>
     </View>
   )
 }
