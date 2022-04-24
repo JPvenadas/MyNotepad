@@ -35,7 +35,14 @@ const Navigations = () => {
             backgroundColor: '#f4dc72',
           }
         }}/>
-        <Stack.Screen name="NoteView" component={Noteview}/>
+        <Stack.Screen name="NoteView" component={Noteview}
+        options={{
+          headerTintColor: 'white',
+          headerTitleAlign: 'center',
+          headerStyle:{
+            backgroundColor: '#f4dc72',
+          }
+        }}/>
         <Stack.Screen name="NoteAdd" component={NoteAdd}
         options={{
           title: "Add a Note",

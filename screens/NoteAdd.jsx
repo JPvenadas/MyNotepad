@@ -3,9 +3,11 @@ import { View, Text, TextInput, StyleSheet, ScrollView } from 'react-native'
 import { Icon, Button } from 'react-native-elements'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { string } from 'yup'
-
+import { useFocusEffect } from '@react-navigation/native'
+import { BackHandler } from 'react-native'
 
 const NoteAdd = ({route,navigation}) => {
+
   
   const [date, setDate] = useState("")
   const [userKey, setUserKey] = useState("")

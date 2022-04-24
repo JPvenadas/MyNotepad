@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useState, useEffect, useRef} from 'react'
+import React, {useLayoutEffect, useState, useEffect} from 'react'
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, InteractionManager} from 'react-native'
 import { Button, Icon } from 'react-native-elements';
 import { Global } from '../styles/GlobalStyles';
@@ -23,23 +23,21 @@ const Menu = ({route, navigation}) => {
     }, [route])
   )
 
-  
 
   const deleteitem = (key) =>{
     let updatedDB = database.users
-    let upload= updatedDB.map((user) => {
+    let newdb= updatedDB.map((user) => {
       user.key,
       user.email,
       user.firstname,
       user.lastname,
       user.password,
       user.notes = user.notes.filter(note => note.key != key)
-    }
-   );
-
-    setDatabase({users: upload})
+    })
+    setDatabase({users: newdb})
     storeData()
-    setnotes(notes.filter(note => note.key != key))
+    route.params.notes = route.params.notes.filter(note => note.key != key)
+    setnotes(route.params.notes)
     setNotes()
   }
   const storeData = async () => {
@@ -64,25 +62,19 @@ const Menu = ({route, navigation}) => {
 
   const setNotes = async () =>{
     setDatabase(await getData())
+    
   }
-
-
 
   const render = ({item}) =>{
     return(
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => {navigation.navigate('NoteView', item)}}>
         <View style={styles.item}>
           <View>
             <Text style={styles.Title}>{item.header}</Text>
             <Text style={styles.date}>{item.date}</Text>
           </View>
           <View style={styles.buttonContainer}>
-             <Button 
-             buttonStyle={styles.buttons}
-             icon={<Icon  size={18} color='#989898' name='edit'/>}
-             onPress={()=>{
              
-             }}/>
              <Button
              buttonStyle={styles.buttons}
              icon={<Icon size={18} color='#949494' name='delete'/>}
@@ -117,7 +109,6 @@ const Menu = ({route, navigation}) => {
       <FlatList
       data={notes}
       renderItem={render}/>
-      <Text>{JSON.stringify(loggeduser)}</Text>
     </View>
   )
 }
