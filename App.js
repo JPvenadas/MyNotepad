@@ -6,7 +6,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 function App() {
- 
+  
+  
   return (
     <NavigationContainer>
       <Navigations />

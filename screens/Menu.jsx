@@ -1,5 +1,5 @@
-import React, {useLayoutEffect, useState, useEffect} from 'react'
-import { View, Text, StyleSheet, FlatList, TouchableOpacity} from 'react-native'
+import React, {useLayoutEffect, useState, useEffect, useRef} from 'react'
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, InteractionManager} from 'react-native'
 import { Button, Icon } from 'react-native-elements';
 import { Global } from '../styles/GlobalStyles';
 import { useFocusEffect } from '@react-navigation/native';
@@ -8,16 +8,53 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 const Menu = ({route, navigation}) => {
   const [notes, setnotes] = useState()
   const [database, setDatabase] = useState()
+  const [userkey, setUserkey] = useState()
+  
+  useEffect(()=>{
+  
+    let active = true
+      if (active) {
+        setNotes()
+      }
+    return ()=>{
+      active= false
+    }
+    
+  },[])
 
   useFocusEffect(
     React.useCallback(() => {
-      setnotes(route.params.notes)
-      getData()
+    let active = true
+      if (active) {
+        setNotes()
+      }
+    return ()=>{
+      active= false
+    }
     }, [route])
   )
-  
+
   const deleteitem = (key) =>{
-    setnotes(notes.filter(note => note.key != key))
+    let updatedDB = database.users
+    let upload= updatedDB.map((user) => {
+      user.key,
+      user.email,
+      user.firstname,
+      user.lastname,
+      user.password,
+      user.notes = user.notes.filter(note => note.key != key)
+    }
+   );
+    setDatabase({users: upload})
+    storeData()
+    setNotes()
+  }
+  const storeData = async () => {
+    try {
+      await AsyncStorage.setItem('database', JSON.stringify(database))
+    } catch (e) {
+    console.log(e)
+    }
   }
 
   const getData = async () => {
@@ -30,6 +67,17 @@ const Menu = ({route, navigation}) => {
      console.log(e)
     }
   }
+
+  const setNotes = async () =>{
+    setUserkey(route.params.key)
+    await getData()
+    database.users.map(user =>{
+      if(user.key == userkey){
+        setnotes(user.notes)
+      }
+  })
+  }
+
 
   const render = ({item}) =>{
     return(
@@ -80,6 +128,7 @@ const Menu = ({route, navigation}) => {
       <FlatList
       data={notes}
       renderItem={render}/>
+      <Text>{JSON.stringify(notes)}</Text>
     </View>
   )
 }

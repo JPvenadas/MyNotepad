@@ -53,11 +53,10 @@ const LoginForm = ({Register, onLogin}) => {
       >{
         ({handleSubmit,handleChange,values, errors, touched})=>(
           <View style={styles.form}>
-
             <Text style={styles.title}>
               <Text style={styles.subtitile1}>My</Text> <Text style={styles.subtitile2}>Notepad</Text>
             </Text>
-
+  
             <View style={Global.inputContainer}>
               <TextInput
                 style={Global.input}
