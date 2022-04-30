@@ -118,11 +118,10 @@ const Menu = ({route, navigation}) => {
         <Text style={styles.email}>{route.params.email}</Text>
         </View>
       </View>
-      <View style={styles.notesContainer}>
         <FlatList
+        style={styles.notesContainer}
           data={notes}
           renderItem={render} />
-      </View>
     </View>
   )
 }
@@ -135,7 +134,7 @@ const styles = StyleSheet.create({
   },
   item:{
     backgroundColor: "#faeea6",
-    marginVertical: 7,
+    marginVertical: 5,
     paddingVertical: 27,
     paddingHorizontal: 10,
     flexDirection: 'row',
@@ -182,8 +181,8 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 13,
   },
-  notesContainer:{
-    padding: 15
+  notesContainer: {
+    margin: 15
   }
 })
 export default Menu
