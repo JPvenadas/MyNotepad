@@ -107,7 +107,7 @@ const Menu = ({route, navigation}) => {
              buttonStyle={styles.buttons}
              icon={<Icon size={18} color='#949494' name='edit'/>}
              onPress={()=>{
-              deleteitem(item.key)
+              navigation.navigate('NoteEdit',{'user': route.params, 'item': item})
              }}/>
              <Button
              buttonStyle={styles.buttons}
@@ -115,7 +115,6 @@ const Menu = ({route, navigation}) => {
              onPress={()=>{
               deleteitem(item.key)
              }}/>
-
           </View>
         </View>
       </TouchableOpacity>

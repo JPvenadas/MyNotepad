@@ -51,9 +51,9 @@ const Navigations = () => {
           headerStyle:{
           backgroundColor: '#f4dc72',
           }}} />
-          <Stack.Screen name="Edit Notes" component={NoteEdit}
+          <Stack.Screen name="NoteEdit" component={NoteEdit}
         options={{
-          title: "Add a Note",
+          title: "Edit a Note",
           headerTitleAlign: 'center',
           headerTintColor: 'white',
           headerStyle:{
