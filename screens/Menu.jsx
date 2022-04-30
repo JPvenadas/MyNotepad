@@ -1,5 +1,5 @@
 import React, {useLayoutEffect, useState, useEffect} from 'react'
-import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, InteractionManager} from 'react-native'
+import { View, Alert, Text, StyleSheet, Image, FlatList, TouchableOpacity, InteractionManager} from 'react-native'
 import { Button, Icon, withTheme } from 'react-native-elements';
 import { Global } from '../styles/GlobalStyles';
 import { useFocusEffect } from '@react-navigation/native';
@@ -23,6 +23,22 @@ const Menu = ({route, navigation}) => {
     }, [route])
   )
 
+  const logoutAlert = () =>{
+    Alert.alert(
+      'Logout?',
+      'Are you sure you want to proceed to Logout?',
+      [
+        { text: "Don't leave", style: 'cancel', onPress: () => {} },
+        {
+          text: 'Logout',
+          style: 'destructive',
+          // If the user confirmed, then we dispatch the action we blocked earlier
+          // This will continue the action that had triggered the removal of the screen
+          onPress: () => navigation.navigate('Login'),
+        },
+      ]
+    );
+  }
 
   const deleteitem = (key) =>{
     let updatedDB = database.users
@@ -100,7 +116,7 @@ const Menu = ({route, navigation}) => {
         icon={<Icon  name='power-off' type='font-awesome' color="#fff"/>}
         buttonStyle={{
           backgroundColor: 'transparent',
-        }} onPress={() => {}}/>
+        }} onPress={() => {logoutAlert()}}/>
       )
     });
   }, [navigation]);
