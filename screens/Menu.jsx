@@ -103,12 +103,19 @@ const Menu = ({route, navigation}) => {
           </View>
           <View style={styles.buttonContainer}>
              
+          <Button
+             buttonStyle={styles.buttons}
+             icon={<Icon size={18} color='#949494' name='edit'/>}
+             onPress={()=>{
+              deleteitem(item.key)
+             }}/>
              <Button
              buttonStyle={styles.buttons}
              icon={<Icon size={18} color='#949494' name='delete'/>}
              onPress={()=>{
               deleteitem(item.key)
              }}/>
+
           </View>
         </View>
       </TouchableOpacity>
