@@ -9,6 +9,7 @@ const Menu = ({route, navigation}) => {
   const [notes, setnotes] = useState()
   const [database, setDatabase] = useState({})
   const [loggeduser, setLoggedUser] = useState()
+  let exit
   
   useFocusEffect(
     React.useCallback(() => {
@@ -23,18 +24,29 @@ const Menu = ({route, navigation}) => {
     }, [route])
   )
 
+  React.useEffect(
+    () =>
+      navigation.addListener('beforeRemove', (e) => {
+        e.preventDefault();
+        exit = e.data.action
+        logoutAlert()
+      }),
+    []
+  );
+  
   const logoutAlert = () =>{
     Alert.alert(
-      'Logout?',
-      'Are you sure you want to proceed to Logout?',
+      'Switch Account',
+      'Proceed to Logout?',
       [
         { text: "Don't leave", style: 'cancel', onPress: () => {} },
         {
           text: 'Logout',
           style: 'destructive',
-          // If the user confirmed, then we dispatch the action we blocked earlier
-          // This will continue the action that had triggered the removal of the screen
-          onPress: () => navigation.navigate('Login'),
+          onPress: () => {
+            navigation.dispatch(exit)
+            navigation.navigate('Login')
+          },
         },
       ]
     );
@@ -116,7 +128,7 @@ const Menu = ({route, navigation}) => {
         icon={<Icon  name='power-off' type='font-awesome' color="#fff"/>}
         buttonStyle={{
           backgroundColor: 'transparent',
-        }} onPress={() => {logoutAlert()}}/>
+        }} onPress={() => {navigation.navigate('Login')}}/>
       )
     });
   }, [navigation]);
