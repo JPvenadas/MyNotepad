@@ -7,12 +7,14 @@ import * as yup from 'yup'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const validation = yup.object({
-    confirmpassword: yup.string().required('Confirmation Required'),
+    confirmpassword: yup.string().required('Confirmation Required')
+    .oneOf([yup.ref('password')], 'Your passwords do not match.'),
     email: yup.string().required('Email address is required')
         .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/,
             'Invalid email address'),
     firstname: yup.string().required(' Firstname Required'),
-    password: yup.string().required('Password Required'),
+    password: yup.string().required('Password Required')
+    .oneOf([yup.ref('confirmpassword')], 'Your passwords do not match.'),
     lastname: yup.string().required('Lastname Required'),
      
 });
