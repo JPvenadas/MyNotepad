@@ -1,6 +1,6 @@
 import React, {useLayoutEffect, useState, useEffect} from 'react'
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, InteractionManager} from 'react-native'
-import { Button, Icon } from 'react-native-elements';
+import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, InteractionManager} from 'react-native'
+import { Button, Icon, withTheme } from 'react-native-elements';
 import { Global } from '../styles/GlobalStyles';
 import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -97,7 +97,7 @@ const Menu = ({route, navigation}) => {
       ),
       headerLeft: ()=>(
         <Button 
-        icon={<Icon  name='menu' color="#fff"/>}
+        icon={<Icon  name='power-off' type='font-awesome' color="#fff"/>}
         buttonStyle={{
           backgroundColor: 'transparent',
         }} onPress={() => {}}/>
@@ -106,9 +106,23 @@ const Menu = ({route, navigation}) => {
   }, [navigation]);
   return (
     <View style={styles.container}>
-      <FlatList
-      data={notes}
-      renderItem={render}/>
+      <View style={styles.userContainer}>
+        <View>
+          <Image style={styles.icon} source={
+            require('../assets/UserIcon.png')}/>
+        </View>
+        <View>
+        <Text style={styles.Username}>
+        {route.params.firstname} {route.params.lastname}
+        </Text>
+        <Text style={styles.email}>{route.params.email}</Text>
+        </View>
+      </View>
+      <View style={styles.notesContainer}>
+        <FlatList
+          data={notes}
+          renderItem={render} />
+      </View>
     </View>
   )
 }
@@ -118,10 +132,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     justifyContent: 'flex-start',
     flex: 1,
-    padding: 15
   },
   item:{
-    backgroundColor: "#d5dc5683",
+    backgroundColor: "#faeea6",
     marginVertical: 7,
     paddingVertical: 27,
     paddingHorizontal: 10,
@@ -135,7 +148,7 @@ const styles = StyleSheet.create({
   Title:{
     fontWeight: 'bold',
     color: '#5a5a5a',
-    fontSize: 16
+    fontSize: 16,
   },
   buttonContainer:{
     flexDirection: "row",
@@ -145,6 +158,32 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 10,
     margin: 5
+  },
+  userContainer:{
+    backgroundColor: "#979797",
+    paddingHorizontal: 20,
+    height: 70,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  icon:{
+    height: 50,
+    width: 50,
+    backgroundColor: '#f6e29a',
+    borderRadius: 2000,
+    marginRight: 20,
+  },
+  Username:{
+    color: '#f8e9b4',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  email:{
+    color: 'white',
+    fontSize: 13,
+  },
+  notesContainer:{
+    padding: 15
   }
 })
 export default Menu
