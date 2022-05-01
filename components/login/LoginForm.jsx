@@ -22,7 +22,7 @@ const LoginForm = ({Register, onLogin}) => {
        setDatabase(JSON.parse(value))
       }
     } catch(e) {
-     console.log(e)
+      Alert.alert('Login Error', 'No Users Found');
     }
   }
 
@@ -92,7 +92,7 @@ const LoginForm = ({Register, onLogin}) => {
             <View style={Global.inputContainer}>
               <Button
                 buttonStyle={Global.subButton}
-                title="Signup"
+                title="Create an account"
                 onPress={()=>{Register()}}/>
             </View>
           </View>)
@@ -130,10 +130,10 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   subtitile1:{
-    color: '#535455',
+    color: '#79797a',
   },
   subtitile2:{
-    color: '#e8bc43'
+    color: '#f5d170'
   }
 })
 

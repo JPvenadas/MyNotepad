@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     image: {
        width: '70%',
        height: 180,
+      
       },
 })
 export default LoginLottie

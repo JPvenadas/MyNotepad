@@ -17,7 +17,7 @@ const Register = ({navigation}) => {
     navigation.navigate('Loading',user)
   }
   return (
-    <ScrollView style={{backgroundColor: 'white'}}>
+    <ScrollView style={{backgroundColor: '#fff'}}>
       <View style={styles.container}>
       <RegisterForm Register={navigateLoading} Login={navigatelogin}/>
       </View>

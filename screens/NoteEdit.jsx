@@ -74,7 +74,6 @@ const NoteEdit = ({route,navigation}) => {
           })
         }}/>
         </View>
-        <Text>{}</Text>
         <TextInput
           multiline
           style={styles.input2}

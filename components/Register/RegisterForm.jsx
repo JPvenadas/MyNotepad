@@ -67,7 +67,7 @@ export function RegisterForm({Register, Login}) {
 
       return (
           <View style={styles.Container}>
-              <Text style={styles.title}>Sign up</Text>
+              <Text style={styles.title}>Create an account</Text>
               <Formik
                   initialValues={
                       {
@@ -193,10 +193,10 @@ const styles = StyleSheet.create({
         height: 'auto'
     },
     title:{
-        color: '#f1962f',
-        fontSize: 24,
+        color: '#f5d170',
+        fontSize: 30,
         fontStyle: 'italic',
-        paddingBottom: 50,
+        paddingBottom: 30,
         fontWeight: 'bold',
        
     },
