@@ -3,6 +3,7 @@ import { View, TextInput, Text, Alert, StyleSheet } from 'react-native'
 import { Button, Input } from 'react-native-elements'
 import { Formik } from 'formik'
 import * as yup from 'yup'
+import { useFocusEffect } from '@react-navigation/native'
 import { Global } from '../../styles/GlobalStyles'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
@@ -10,36 +11,48 @@ const validation = yup.object({
   email: yup.string().required('Please Input your Username'),
   password: yup.string().required('Please Input your Password')
 });
-
-
+const initialValues = {
+  email: '',
+  password: '',
+}
 const LoginForm = ({Register, onLogin}) => {
-
+  const [empty, setempty] = useState(false)
   const [database, setDatabase] = useState("")
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('database')
       if(value != null) {
        setDatabase(JSON.parse(value))
+       setempty(true)
+      }
+      else{
+       setempty(false)
       }
     } catch(e) {
-      Alert.alert('Login Error', 'No Users Found');
+      
     }
   }
 
-  useEffect(()=>{
-    getData()
-  },[database])
+  useFocusEffect(
+    React.useCallback(() => {
+    let active = true
+      if (active) {
+       getData()
+      }
+    return ()=>{
+      active= false
+    }
+    }, [])
+  )
+
   return (
     <View style={styles.Container}>
       <Formik
-        initialValues={
-          {
-            email: '',
-            password: '',
-          }}
+        initialValues={initialValues}
         onSubmit={
-          (values) => {
-           let variable
+          (values, {resetForm}) => {
+           if(empty){
+            let variable
             database.users.map((user) => {
               if (values.email == user.email && values.password == user.password){
                 onLogin(user)
@@ -47,11 +60,14 @@ const LoginForm = ({Register, onLogin}) => {
               }
             }) 
             !variable? Alert.alert('Login Error', 'Wrong Username and Password'): ''; 
+           }else{
+             Alert.alert('Login error', 'No users Found, Please Register first')
+           }
           }
         }
         validationSchema={validation}
       >{
-        ({handleSubmit,handleChange,values, errors, touched})=>(
+        ({handleSubmit,handleBlur ,handleChange,values, errors, touched})=>(
           <View style={styles.form}>
             <Text style={styles.title}>
               <Text style={styles.subtitile1}>My</Text> <Text style={styles.subtitile2}>Notepad</Text>
@@ -60,6 +76,7 @@ const LoginForm = ({Register, onLogin}) => {
             <View style={Global.inputContainer}>
               <TextInput
                 style={Global.input}
+                name =  'email'
                 onChangeText={handleChange('email')}
                 placeholder='Username' />
               {errors.email && touched.email ?
@@ -72,6 +89,7 @@ const LoginForm = ({Register, onLogin}) => {
                 style={Global.input}
                 onChangeText={handleChange('password')}
                 secureTextEntry={true}
+                name = 'password'
                 placeholder='Password' />
               {errors.password && touched.password ?
                 <Text style={Global.error}>{errors.password}</Text> :
