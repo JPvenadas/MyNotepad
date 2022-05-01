@@ -4,6 +4,9 @@ import { View, Text,
   ScrollView, StyleSheet } from 'react-native'
 import { Global } from '../styles/GlobalStyles'
 import RegisterForm from '../components/Register/RegisterForm'
+import { Dimensions } from 'react-native';
+
+const windowHeight = Dimensions.get('window').height;
 
 
 const Register = ({navigation}) => {
@@ -14,7 +17,7 @@ const Register = ({navigation}) => {
     navigation.navigate('Loading',user)
   }
   return (
-    <ScrollView >
+    <ScrollView style={{backgroundColor: 'white'}}>
       <View style={styles.container}>
       <RegisterForm Register={navigateLoading} Login={navigatelogin}/>
       </View>
@@ -25,7 +28,7 @@ const styles = StyleSheet.create(
   {
     container: {
       flex:1,
-      height: 700,
+      height: windowHeight,
       justifyContent: 'center',
     }
   }

@@ -4,9 +4,9 @@ export const Global = StyleSheet.create(
     {
         container:{
             flex: 1,
-            backgroundColor: '#fff',
+            backgroundColor: 'white',
             justifyContent: 'center',
-            alignContent: 'center'
+            alignItems: 'center',
           },
         input: {
             padding: 10,
