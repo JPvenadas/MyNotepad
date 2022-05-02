@@ -33,8 +33,9 @@ const styles = StyleSheet.create({
     height: '95%',
   },
   text:{
-    paddingVertical: 30,
+    paddingVertical: 17,
     paddingHorizontal: 15,
+    fontSize: 16,
   }
 })
 export default Noteview

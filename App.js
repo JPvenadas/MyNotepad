@@ -7,16 +7,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function App() {
   
-  const clearAll = async () => {
-    try {
-      await AsyncStorage.clear()
-    } catch(e) {
-      // clear error
-    }
-  
-    console.log('Done.')
-  }
-  clearAll()
   return (
     <NavigationContainer>
       <Navigations />

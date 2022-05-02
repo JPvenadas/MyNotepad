@@ -1,11 +1,13 @@
 import React,{useLayoutEffect, useState, useEffect} from 'react'
-import { View, Text, TextInput, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, TextInput, StyleSheet,Dimensions, ScrollView } from 'react-native'
 import { Icon, Button } from 'react-native-elements'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { string } from 'yup'
 import { useFocusEffect } from '@react-navigation/native'
 import { BackHandler } from 'react-native'
 import { initialWindowMetrics } from 'react-native-safe-area-context'
+
+const windowHeight = Dimensions.get('window').height;
 
 const NoteEdit = ({route,navigation}) => {
 
@@ -55,7 +57,7 @@ const NoteEdit = ({route,navigation}) => {
           onChangeText={val => setHeader(val)}
           placeholder="Header" />
         <Button buttonStyle={styles.saveBTN}
-        icon={<Icon name="save" color="#fff"/>}
+        icon={<Icon name="edit" color="#fff1a4"/>}
         onPress={()=>{
           let updateDB = database
           updateDB.users.map(user=>{
@@ -103,17 +105,18 @@ const styles = StyleSheet.create({
     margin: 15,
     borderRadius: 5,
     marginTop: 0,
-    minHeight: 500,
+    minHeight: windowHeight * .75,
   },
   headContainer: {
     flexDirection: 'row'
   },
   saveBTN: {
-    padding: 19,
+    padding: 15,
     fontSize: 16,
+    borderRadius: 1000,
     flex: 2,
     margin: 18,
-    backgroundColor:  "#ddb74ffc",
+    backgroundColor:  "#959595fa",
   }
 })
 

@@ -1,14 +1,15 @@
 import React,{useLayoutEffect, useState, useEffect} from 'react'
-import { View, Text, TextInput, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, TextInput, Dimensions, StyleSheet, ScrollView } from 'react-native'
 import { Icon, Button } from 'react-native-elements'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { string } from 'yup'
 import { useFocusEffect } from '@react-navigation/native'
 import { BackHandler } from 'react-native'
 
+const windowHeight = Dimensions.get('window').height;
+
 const NoteAdd = ({route,navigation}) => {
 
-  
   const [date, setDate] = useState("")
   const [userKey, setUserKey] = useState("")
   const [database, setDatabase] = useState("")
@@ -50,7 +51,7 @@ const NoteAdd = ({route,navigation}) => {
           onChangeText={val => setHeader(val)}
           placeholder="Header" />
         <Button buttonStyle={styles.saveBTN}
-        icon={<Icon name="save" color="#fff"/>}
+        icon={<Icon name="edit" color="#fff6a8"/>}
         onPress={()=>{
           let updateDB = database
           updateDB.users.map(user=>{
@@ -69,7 +70,6 @@ const NoteAdd = ({route,navigation}) => {
           })
         }}/>
         </View>
-        
         <TextInput
           multiline
           style={styles.input2}
@@ -94,21 +94,22 @@ const styles = StyleSheet.create({
   input2:{
     backgroundColor: "#f8ee95ce",
     padding: 19,
-    fontSize: 16,
+    fontSize: 17,
     margin: 15,
     borderRadius: 5,
     marginTop: 0,
-    minHeight: 500,
+    minHeight: windowHeight * .75,
   },
   headContainer: {
     flexDirection: 'row'
   },
   saveBTN: {
-    padding: 19,
+    padding: 15,
     fontSize: 16,
     flex: 2,
     margin: 18,
-    backgroundColor:  "#ddb74ffc",
+    borderRadius: 1000,
+    backgroundColor:  "#909090fa",
   }
 })
 
